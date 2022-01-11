@@ -14,8 +14,9 @@ class ItemAdapter(var items: List<User>): RecyclerView.Adapter<ViewHolder>() {
 
     class ViewHolder(val binding: ItemLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bindView(item: User){
-
+            binding.user = item
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

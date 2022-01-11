@@ -17,7 +17,7 @@ abstract class UserDataBase: RoomDatabase() {
         fun getUserDatabase(context: Context): UserDataBase? {
             if (INSTANCE == null) {
                 INSTANCE =
-                    Room.databaseBuilder<UserDataBase>(context, UserDataBase::class.java, "APPDB")
+                    Room.databaseBuilder<UserDataBase>(context, UserDataBase::class.java, "DataBaseUser")
                         .allowMainThreadQueries()
                         .fallbackToDestructiveMigration()
                         .build()

@@ -36,6 +36,16 @@
             android:text="Add User"
             android:textColor="@color/white"/>
 
+        <Button
+            android:id="@+id/button_delete_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/design_default_color_on_primary"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:text="Delete User"
+            android:textColor="@color/white"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_user"
             android:layout_marginTop="20dp"

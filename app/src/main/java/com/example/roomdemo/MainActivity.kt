@@ -13,7 +13,7 @@ import com.example.roomdemo.databinding.ActivityMainBinding
 import com.example.roomdemo.ui.adapters.ItemAdapter
 import com.example.roomdemo.ui.models.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
 
@@ -25,27 +25,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        items = UserDataBase.getUserDatabase(this@MainActivity)?.userDao()?.getListUser()!!
+
         setupAdapter()
 
         binding.apply {
             buttonAddUser.setOnClickListener {
                 addUser()
+            }
 
-
+            buttonDeleteUser.setOnClickListener {
+                deleteUser()
             }
         }
+
     }
 
-    private fun hideSoftKeyboard() {
-        try {
-            val inputMethodManager: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE)
-                    as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-        }catch(ex: NullPointerException){
-            ex.printStackTrace()
+    private fun deleteUser() {
+        binding.apply {
+            UserDataBase.getUserDatabase(this@MainActivity)?.userDao()?.deleteAll()!!
+            useradapter.notifyDataSetChanged()
         }
-
     }
+
 
     @SuppressLint("NotifyDataSetChanged")
     private fun addUser() {
@@ -67,13 +69,23 @@ class MainActivity : AppCompatActivity() {
 
             hideSoftKeyboard()
 
+            // lấy giá trị cho items
             items = UserDataBase.getUserDatabase(this@MainActivity)?.userDao()?.getListUser()!!
-
             useradapter.notifyDataSetChanged()
         }
 
     }
 
+    private fun hideSoftKeyboard() {
+        try {
+            val inputMethodManager: InputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE)
+                    as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+        }catch(ex: NullPointerException){
+            ex.printStackTrace()
+        }
+
+    }
 
     private fun setupAdapter() {
         useradapter = ItemAdapter(items)
@@ -81,5 +93,6 @@ class MainActivity : AppCompatActivity() {
             adapter = useradapter
             layoutManager = LinearLayoutManager(context)
         }
+
     }
 }

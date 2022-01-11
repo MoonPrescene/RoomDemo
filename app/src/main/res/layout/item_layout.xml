@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.example.roomdemo.ui.models.User"/>
+        <variable
+            name="user"
+            type="User" />
+    </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -9,15 +17,16 @@
             android:id="@+id/textViewUserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is text view 1"
+            android:text="@{user.userName}"
             android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/textViewUserAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="This is text view 2"
+            android:text="@{user.userAddress}"
             />
+
 
     </LinearLayout>
 </layout>
